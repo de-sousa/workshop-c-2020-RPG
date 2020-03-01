@@ -1,9 +1,9 @@
 #include "player.h"
 
 
-PLAYER* makePlayer(char* name)
+PLAYER *makePlayer(char *name)
 {
-    PLAYER* player = (PLAYER*)malloc(sizeof(PLAYER));
+    PLAYER *player = malloc(sizeof(PLAYER));
     player -> name = name;
     player -> hp = 100;
     player -> inventory = makeInventory();
@@ -16,12 +16,12 @@ PLAYER* makePlayer(char* name)
     return player;
 }
 
-int calculateCritical(PLAYER* player)
+int calculateCritical(PLAYER *player)
 {
     return (critHands(player)<=(rand()/RAND_MAX))?1:0;
 }
 
-float critHands(PLAYER* player)
+float critHands(PLAYER *player)
 {
     float chance = 0;
     if (player->left_hand->flag == WEAPON)
@@ -31,7 +31,7 @@ float critHands(PLAYER* player)
     return chance;
 }
 
-int damageHands(PLAYER* player)
+int damageHands(PLAYER *player)
 {
     int damage = 0;
     if(player->left_hand->flag == WEAPON)
@@ -41,7 +41,7 @@ int damageHands(PLAYER* player)
     return damage;
 }
 
-int defenseHands(PLAYER* player)
+int defenseHands(PLAYER *player)
 {
     int defense = 0;
     if (player->left_hand->flag == SHIELD)
@@ -49,4 +49,13 @@ int defenseHands(PLAYER* player)
     if (player->right_hand->flag == SHIELD)
         defense += player->right_hand->Union.Shield.defense;
     return defense;
+}
+
+void destroyPlayer(PLAYER *player)
+{
+    // Carlos: I don't remember if doing free(player) would free
+    //       everything inside it as well, so I prefer to free
+    //       everything dynamically allocated inside first.
+    destroyInventory(player->inventory);
+    free(player);
 }

@@ -13,17 +13,18 @@ struct Player
 {
     char* name;
     int hp;
-    INVENTORY* inventory;
+    INVENTORY *inventory;
     int wallet;
-    ITEM* left_hand;
-    ITEM* right_hand;   
+    ITEM *left_hand;
+    ITEM *right_hand;
 } typedef PLAYER;
 
 
-PLAYER* makePlayer(char*);
+PLAYER *makePlayer(char*);
 int calculateCritical(PLAYER*);
 float critHands(PLAYER*);
 int damageHands(PLAYER*);
 int defenseHands(PLAYER*);
+void destroyPlayer(PLAYER*);
 
 #endif // _PLAYER_H_

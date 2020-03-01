@@ -11,9 +11,10 @@ struct Enemy
 } typedef ENEMY;
 
 
-ENEMY* makeEnemy(int, int);
+ENEMY *makeEnemy(int, int);
 int calculateHP(int,int);
 int calculateAttack(int,int);
 int calculateDefense(int,int);
+void destroyEnemy(ENEMY*);
 
 #endif // _ENEMY_H_

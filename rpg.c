@@ -13,9 +13,9 @@
 #define NUM_OPTIONS 3
 #define MAX_HP 200
 
-char* RACES[NUM_RACES] = {"Bug"};
-char* CLASSES[NUM_CLASSES] = {"Minion","Soldier","Sergeant","Commander","King"};
-char* OPTIONS[NUM_OPTIONS] = {"Attack", "Defend, Plan and Organize", "Analyze Inventory"};
+const char *RACES[NUM_RACES] = {"Bug"};
+const char *CLASSES[NUM_CLASSES] = {"Minion","Soldier","Sergeant","Commander","King"};
+const char *OPTIONS[NUM_OPTIONS] = {"Attack", "Defend, Plan and Organize", "Analyze Inventory"};
 
 
 void printPlayerCommand()
@@ -44,7 +44,7 @@ char* getName()
 {
     printNarratorCommand();
     printf("What's your name? (maximum %d characters)\n", MAX_NAME);
-    char* name = malloc(sizeof(char) * MAX_NAME);
+    char *name = malloc(sizeof(char) * MAX_NAME);
     printPlayerCommand();
     scanf("%s", name);
     return name;
@@ -73,7 +73,7 @@ int getOption()
     return option;
 }
 
-void playerAttack(PLAYER* player, ENEMY* enemy)
+void playerAttack(PLAYER *player, ENEMY *enemy)
 {
     printNarratorCommand();
     printf("You are attacking!\n");
@@ -95,7 +95,7 @@ void playerAttack(PLAYER* player, ENEMY* enemy)
     printf("You have dealt %d damage.\n", damage);
 }
 
-void playerDefend(PLAYER* player)
+void playerDefend(PLAYER *player)
 {
     printNarratorCommand();
     printf("You are defending!\n");
@@ -112,11 +112,11 @@ void playerDefend(PLAYER* player)
     printf("You have regained %d hp points.\n", health - remainder);
 }
 
-void listInventory(PLAYER* player)
+void listInventory(PLAYER *player)
 {
     printNarratorCommand();
     printf("Your inventory has:\n");
-    MEMBER* iterator = player->inventory->first;
+    MEMBER *iterator = player->inventory->first;
     while(iterator != NULL)
     {
         if (iterator->item->flag == WEAPON)
@@ -133,7 +133,7 @@ void listInventory(PLAYER* player)
     }
 }
 
-void playerTurn(PLAYER* player, ENEMY* enemy)
+void playerTurn(PLAYER *player, ENEMY *enemy)
 {
     while(1){           
         int chose = 0;
@@ -165,7 +165,7 @@ void playerTurn(PLAYER* player, ENEMY* enemy)
     }
 }
 
-void enemyTurn(ENEMY* enemy, PLAYER* player)
+void enemyTurn(ENEMY *enemy, PLAYER *player)
 {
     int defense = defenseHands(player);
     int damage = ((enemy->attack - defense)>0)?enemy->attack-defense:1;
@@ -174,7 +174,7 @@ void enemyTurn(ENEMY* enemy, PLAYER* player)
     printf("The enemy has dealt %d damage\n", damage);
 }
 
-int fight(PLAYER* player, ENEMY* enemy)
+int fight(PLAYER *player, ENEMY *enemy)
 {
     while(1){
         playerTurn(player,enemy);
@@ -186,10 +186,10 @@ int fight(PLAYER* player, ENEMY* enemy)
     }
 }
 
-int main(int argc, char const *argv[])
+int main(int argc, char **argv)
 {
     srand(time(0));
-    PLAYER* player = makePlayer(getName());
+    PLAYER *player = makePlayer(getName());
     printLine();
     printPrompt();
     printLine();
@@ -200,7 +200,7 @@ int main(int argc, char const *argv[])
         {
             printNarratorCommand();
             printf("A %s %s appears!\n", RACES[race], CLASSES[class]);
-            ENEMY* enemy = makeEnemy(race,class);
+            ENEMY *enemy = makeEnemy(race,class);
             result = fight(player,enemy);
             free(enemy);
             if(!result) break;
@@ -225,7 +225,7 @@ int main(int argc, char const *argv[])
         printNarratorCommand();
         printf("You lost :( Better luck next time\n");
     }
-    free(player);
+    destroyPlayer(player);
 
     return 0;
 }

@@ -3,29 +3,29 @@
 #include "inventory.h"
 #include "item.h"
 
-INVENTORY* makeInventory()
+INVENTORY *makeInventory()
 {
-    INVENTORY* inventory = (INVENTORY*)malloc(sizeof(INVENTORY));
+    INVENTORY *inventory = malloc(sizeof(INVENTORY));
     inventory -> first = NULL;
     inventory -> last = NULL;
     inventory -> size = 0;
     return inventory;
 }
 
-MEMBER* makeMember(ITEM* item)
+MEMBER *makeMember(ITEM *item)
 {
-    MEMBER* member = (MEMBER*) malloc(sizeof(MEMBER));
+    MEMBER *member = malloc(sizeof(MEMBER));
     member -> item = item;
     member -> next = NULL;
     return member;
 }
 
-void insertItem(INVENTORY* inventory,ITEM* item)
+void insertItem(INVENTORY *inventory,ITEM *item)
 {
     insertMember(inventory, makeMember(item));
 }
 
-void insertMember(INVENTORY* inventory, MEMBER* member)
+void insertMember(INVENTORY *inventory, MEMBER *member)
 {
     if (isEmpty(inventory))
     {
@@ -39,11 +39,23 @@ void insertMember(INVENTORY* inventory, MEMBER* member)
     inventory -> size += 1;
 }
 
-int isEmpty(INVENTORY* inventory)
+int isEmpty(INVENTORY *inventory)
 {
     int flag;
 
     flag = (inventory -> size == 0)? 1 : 0;
 
     return flag;
+}
+
+void destroyInventory(INVENTORY *inventory)
+{
+    MEMBER *mem2, *mem1 = inventory->first;
+    while (mem1 != NULL)
+    {
+        mem2 = mem1->next;
+        free(mem1);
+        mem1 = mem2;
+    }
+    free(inventory);
 }
