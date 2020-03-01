@@ -23,4 +23,4 @@ struct Item
 ITEM* makeWeapon(int,float);
 ITEM* makeShield(int);
 
-#endif
+#endif // _ITEM_H_

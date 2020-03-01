@@ -26,4 +26,4 @@ float critHands(PLAYER*);
 int damageHands(PLAYER*);
 int defenseHands(PLAYER*);
 
-#endif
+#endif // _PLAYER_H_

@@ -21,21 +21,23 @@ char* OPTIONS[NUM_OPTIONS] = {"Attack", "Defend, Plan and Organize", "Analyze In
 void printPlayerCommand()
 {
     printf(">>  ");
+    fflush(stdout);
 }
 
 void printNarratorCommand()
 {
     printf("||  ");
+    fflush(stdout);
 }
 
 void printPrompt()
 {
     printNarratorCommand();
-    printf("You live in a fantastic world filled with rainbows and happiness.\n");
+    puts("You live in a fantastic world filled with rainbows and happiness.");
     printNarratorCommand();
-    printf("But, one day the BUGS appeared!\n");
+    puts("But, one day the BUGS appeared!");
     printNarratorCommand();
-    printf("You grab your Shield and Sword, and off you go on an adventure\n");
+    puts("You grab your Shield and Sword, and off you go on an adventure.");
 }
 
 char* getName()
@@ -51,7 +53,7 @@ char* getName()
 void printLine()
 {
     printNarratorCommand();
-    printf("--------------------------------------------------------\n");
+    puts("--------------------------------------------------------");
 }
 
 int getOption()
@@ -90,13 +92,13 @@ void playerAttack(PLAYER* player, ENEMY* enemy)
         enemy->hp -= damage;
     }    
     printNarratorCommand();
-    printf("You have dealt %d damage!\n", damage);
+    printf("You have dealt %d damage.\n", damage);
 }
 
 void playerDefend(PLAYER* player)
 {
     printNarratorCommand();
-    printf("You are defending\n");
+    printf("You are defending!\n");
     int health = defenseHands(player);
     health = (health>0)?health:1;
     player->hp += health;
@@ -107,7 +109,7 @@ void playerDefend(PLAYER* player)
         player->hp = MAX_HP;
     }
     printNarratorCommand();
-    printf("You have regained %d hp points\n", health - remainder);
+    printf("You have regained %d hp points.\n", health - remainder);
 }
 
 void listInventory(PLAYER* player)
@@ -174,7 +176,6 @@ void enemyTurn(ENEMY* enemy, PLAYER* player)
 
 int fight(PLAYER* player, ENEMY* enemy)
 {
-    
     while(1){
         playerTurn(player,enemy);
         if((enemy->hp) <= 0)

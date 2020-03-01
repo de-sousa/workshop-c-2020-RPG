@@ -25,4 +25,4 @@ int isEmpty(INVENTORY*);
 MEMBER* makeMember(ITEM*);
 void insertMember(INVENTORY*,MEMBER*);
 
-#endif
+#endif // _INVENTORY_H_

@@ -16,4 +16,4 @@ int calculateHP(int,int);
 int calculateAttack(int,int);
 int calculateDefense(int,int);
 
-#endif
+#endif // _ENEMY_H_
