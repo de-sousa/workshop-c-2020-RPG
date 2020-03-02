@@ -56,7 +56,7 @@ void printLine()
     puts("--------------------------------------------------------");
 }
 
-int getOption()
+char getOption()
 {
     printNarratorCommand();
     printf("What are you going to do?\n");
@@ -65,11 +65,11 @@ int getOption()
         printNarratorCommand();
         printf("%d) %s\n", option, OPTIONS[option]);
     }
-    int option;
+    char option;
     printNarratorCommand();
-    printf("\n");
+    putchar('\n');
     printPlayerCommand();
-    scanf("%d", &option);
+    scanf(" %c", &option);
     return option;
 }
 
@@ -141,19 +141,19 @@ void playerTurn(PLAYER *player, ENEMY *enemy)
         printLine();
         printNarratorCommand();
         printf("YOU : %d HP ---  %d HP : ENEMY\n", player->hp, enemy->hp);
-        int option = getOption();
+        char option = getOption();
         printLine();
         switch (option)
         {
-            case 0:
-            chose = 1;
-            playerAttack(player, enemy);
+            case '0':
+                chose = 1;
+                playerAttack(player, enemy);
                 break;
-            case 1:
+            case '1':
                 chose = 1;
                 playerDefend(player);
                 break;
-            case 2:
+            case '2':
                 listInventory(player);
                 break;
             default:
@@ -161,7 +161,8 @@ void playerTurn(PLAYER *player, ENEMY *enemy)
                 printf("Can you repeat?\n");
                 break;
         }
-        if(chose) break;
+        while ((option = getchar()) != '\n');
+        if (chose) break;
     }
 }
 
@@ -227,5 +228,5 @@ int main(int argc, char **argv)
     }
     destroyPlayer(player);
 
-    return 0;
+    return EXIT_SUCCESS;
 }
