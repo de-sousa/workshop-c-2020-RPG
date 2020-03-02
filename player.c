@@ -18,7 +18,7 @@ PLAYER *makePlayer(char *name)
 
 int calculateCritical(PLAYER *player)
 {
-    return (critHands(player)<=(rand()/RAND_MAX))?1:0;
+    return (critHands(player)<=((float)rand()/RAND_MAX))?1:0;
 }
 
 float critHands(PLAYER *player)
