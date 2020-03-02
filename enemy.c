@@ -1,8 +1,8 @@
 #include "enemy.h"
 
-ENEMY* makeEnemy(int race, int class)
+ENEMY *makeEnemy(int race, int class)
 {
-    ENEMY* enemy = (ENEMY*) malloc(sizeof(ENEMY));
+    ENEMY *enemy = malloc(sizeof(ENEMY));
     enemy->hp = calculateHP(race,class);
     enemy->attack = calculateAttack(race,class);
     enemy->defense = calculateDefense(race,class);
@@ -22,4 +22,9 @@ int calculateAttack(int race,int class)
 int calculateDefense(int race,int class)
 {
     return 2*class + race;
+}
+
+void destroyEnemy(ENEMY *enemy)
+{
+    free(enemy);
 }

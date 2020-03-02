@@ -20,7 +20,8 @@ struct Item
     
 } typedef ITEM;
 
-ITEM* makeWeapon(int,float);
-ITEM* makeShield(int);
+ITEM *makeWeapon(int,float);
+ITEM *makeShield(int);
+void destroyItem(ITEM*);
 
-#endif
+#endif // _ITEM_H_
