@@ -35,6 +35,7 @@ void insertMember(INVENTORY *inventory, MEMBER *member)
     else
     {
         inventory -> last -> next = member;
+        inventory -> last = member;
     }
     inventory -> size += 1;
 }
