@@ -70,6 +70,10 @@ char getOption()
     putchar('\n');
     printPlayerCommand();
     scanf(" %c", &option);
+   
+    char ch;
+    while ((ch = getchar()) != '\n');
+    
     return option;
 }
 
@@ -161,7 +165,6 @@ void playerTurn(PLAYER *player, ENEMY *enemy)
                 printf("Can you repeat?\n");
                 break;
         }
-        while ((option = getchar()) != '\n');
         if (chose) break;
     }
 }
